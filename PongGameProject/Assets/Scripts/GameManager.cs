@@ -9,10 +9,14 @@ public class GameManager : MonoBehaviour
     private BoxCollider2D downWall;
     private BoxCollider2D upWall;
 
+    public Transform player1;
+    public Transform player2;
+
     // Start is called before the first frame update
     void Start()
     {
         ResetWall();//调用
+        ResetPlayer();
     }
 
     // Update is called once per frame
@@ -52,5 +56,15 @@ public class GameManager : MonoBehaviour
         float width = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height)).x*2;
         upWall.size = new Vector2(width,1);
         */
+    }
+
+    void ResetPlayer(){
+        Vector3 player1Position = Camera.main.ScreenToWorldPoint(new Vector3(100, Screen.height/2,0));//屏幕坐标转换成世界坐标给player1
+        player1Position.z = 0;
+        player1.position = player1Position;
+
+        Vector3 player2Position =  Camera.main.ScreenToWorldPoint(new Vector3(Screen.width-100, Screen.height/2,0));
+        player2Position.z = 0;
+        player2.position = player2Position;
     }
 }
