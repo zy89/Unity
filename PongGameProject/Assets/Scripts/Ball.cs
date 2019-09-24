@@ -46,6 +46,12 @@ public class Ball : MonoBehaviour
             */
             rigidbody2D.velocity = velocity;//赋值给小球新的速度
         }
-        //Debug.Log(rigidbody2D.velocity);//检测当前速度
+        //Debug.Log(rigidbody2D.velocity); 检测当前速度
+
+        //判断小球有没有碰墙
+        if(col.gameObject.name=="rightWall" || col.gameObject.name=="leftWall"){
+            //调用gameManager里的修改分数方法
+            GameManager.Instance.ChangeScore(col.gameObject.name);//把名字传回去
+        }
     }
 }

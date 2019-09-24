@@ -1,9 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager _instance;
+    //外界只能访问到下面的get方法
+    public static GameManager Instance{
+        get{
+            return _instance;
+        }
+    }
+
+
     private BoxCollider2D rightWall;//直接在代码里得到wall，设为private
     private BoxCollider2D leftWall;
     private BoxCollider2D downWall;
@@ -11,6 +21,16 @@ public class GameManager : MonoBehaviour
 
     public Transform player1;
     public Transform player2;
+
+    private int score1;//用来在下面方法算分
+    private int score2;
+
+    public Text score1Text;//外部赋值
+    public Text score2Text;
+
+    void Awake() {
+        _instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -66,5 +86,16 @@ public class GameManager : MonoBehaviour
         Vector3 player2Position =  Camera.main.ScreenToWorldPoint(new Vector3(Screen.width-100, Screen.height/2,0));
         player2Position.z = 0;
         player2.position = player2Position;
+    }
+
+    public void ChangeScore(string wallName){
+        if(wallName == "leftWall"){
+            score2++;
+        }else if(wallName == "rightWall"){
+            score1++;
+        }
+
+        score1Text.text = score1.ToString();//更新UI的分数
+        score2Text.text = score2.ToString();
     }
 }
