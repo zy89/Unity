@@ -20,6 +20,19 @@ public class Ball : MonoBehaviour
         }
     }
 
+    void Update() {
+        //保证x横轴的速度不小于9
+        Vector2 velocity = rigidbody2D.velocity;//得到当前速度
+        if(velocity.x<9 && velocity.x>-9 && velocity.x!=0){
+            if(velocity.x>0){
+                velocity.x=10;
+            }else{
+                velocity.x=-10;
+            }
+            rigidbody2D.velocity = velocity;//速度赋值回去
+        }
+    }
+
     //碰撞方法
     void OnCollisionEnter2D(Collision2D col) {
         //通过tag判断碰撞到的是不是player
@@ -33,5 +46,6 @@ public class Ball : MonoBehaviour
             */
             rigidbody2D.velocity = velocity;//赋值给小球新的速度
         }
+        //Debug.Log(rigidbody2D.velocity);//检测当前速度
     }
 }
