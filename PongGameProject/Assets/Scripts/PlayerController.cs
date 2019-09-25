@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D() {
         
+        //随机一下播放速度
+        audio.pitch = Random.Range(0.8f, 1.2f);
+
         audio.Play();
         //Debug.Log("started");
     }
