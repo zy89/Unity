@@ -10,12 +10,15 @@ public class PlayerController : MonoBehaviour
     public float speed;
 
     private Rigidbody2D rigidbody2D;
+    private AudioSource audio;//得到声音组件
 
     
 
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
+        
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -33,5 +36,12 @@ public class PlayerController : MonoBehaviour
         {
             rigidbody2D.velocity = new Vector2(0, 0);
         }
+
+    }
+
+    void OnCollisionEnter2D() {
+        
+        audio.Play();
+        //Debug.Log("started");
     }
 }
