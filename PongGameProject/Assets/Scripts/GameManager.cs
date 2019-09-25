@@ -98,4 +98,17 @@ public class GameManager : MonoBehaviour
         score1Text.text = score1.ToString();//更新UI的分数
         score2Text.text = score2.ToString();
     }
+
+    //Reset方法，在button里调用
+    public void Reset(){
+        score1=0;//两个分数重置到0
+        score2=0;
+        score1Text.text = score1.ToString();//更新UI的分数显示也到0
+        score2Text.text = score2.ToString();
+
+        //ball的重置方法在Ball里
+        //查找方法，发信息调用
+        GameObject.Find("Ball").SendMessage("Reset");
+
+    }
 }

@@ -13,11 +13,8 @@ public class Ball : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();//获取组件
         int number = Random.Range(0,2);// generate 0 or 1
-        if(number==1){
-            rigidbody2D.AddForce(new Vector2(100,0));//往x方向施加100的力，也就是右边
-        }else{
-            rigidbody2D.AddForce(new Vector2(-100,0));//左
-        }
+        //调用小球移动方法
+        GoBall();
     }
 
     void Update() {
@@ -54,4 +51,22 @@ public class Ball : MonoBehaviour
             GameManager.Instance.ChangeScore(col.gameObject.name);//把名字传回去
         }
     }
+
+    //重置小球位置方法
+    public void Reset(){
+        transform.position = Vector3.zero;
+        GoBall();
+    }
+
+    //小球位置方法
+    void GoBall(){
+        int number = Random.Range(0,2);// generate 0 or 1
+        if(number==1){
+            rigidbody2D.AddForce(new Vector2(100,0));//往x方向施加100的力，也就是右边
+        }else{
+            rigidbody2D.AddForce(new Vector2(-100,0));//左
+        }
+    }
+
+
 }
