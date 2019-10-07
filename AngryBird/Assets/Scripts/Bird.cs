@@ -8,14 +8,26 @@ public class Bird : MonoBehaviour
     public Transform rightPos;
     public float maxDis = 3;//默认最大距离3m
 
+    private SpringJoint2D sp;
+    private Rigidbody2D rg;
+
+    private void Awake() {
+        sp = GetComponent<SpringJoint2D>();//获取组件
+        rg = GetComponent<Rigidbody2D>();
+    }
+
     private void OnMouseDown() //鼠标按下调用
     {
         isClick=true;
+        rg.isKinematic = true;//按鼠标的时候，不要dynamic
     }
 
     private void OnMouseUp() //鼠标抬起
     {
         isClick=false;
+        rg.isKinematic = false;
+        //Invoke用来处理函数延时调用。两个参数，第一个是方法名，第二个是延时的时间
+        Invoke("Fly", 0.1f);
     }
 
     private void Update() {
@@ -30,12 +42,15 @@ public class Bird : MonoBehaviour
 
             //用Vector3.Distance计算两个向量的距离，结果是float的正数
             if(Vector3.Distance(transform.position, rightPos.position) > maxDis){//进行位置限定
-            
+
                 //小鸟位置减去右树枝位置，得到一个向量。用normalized单位化，只要方向不要值
                 Vector3 pos = (transform.position - rightPos.position).normalized;
                 pos*= maxDis;//最大长度的向量
                 transform.position = pos + rightPos.position;//最后小鸟被限定的位置
             }
         }
+    }
+    void Fly(){
+        sp.enabled = false;//鼠标抬起，弹簧组件禁用，就能飞出去
     }
 }
