@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Bird.cs" />
+     <Compile Include="Assets\Scripts\Pig.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/74761/OneDrive/Desktop/learning/Unity_git/Unity/AngryBird/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
